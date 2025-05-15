@@ -106,6 +106,14 @@ function App() {
 
     try {
       const currentMode = modeConfigs[selectedMode];
+      const apiKey = process.env.REACT_APP_OPENROUTER_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error('Chave API não encontrada. Verifique se a variável de ambiente REACT_APP_OPENROUTER_API_KEY está configurada.');
+      }
+
+      console.log('API Key presente:', apiKey ? 'Sim' : 'Não');
+      
       const requestBody = {
         model: currentMode.model,
         messages: [...messages, userMessage].map(msg => ({
@@ -123,7 +131,7 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_OPENROUTER_API_KEY}`,
+          'Authorization': `Bearer ${apiKey}`,
           'HTTP-Referer': window.location.origin,
           'X-Title': 'SEONN'
         },
