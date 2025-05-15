@@ -123,7 +123,7 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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',
+          'Authorization': `Bearer ${process.env.REACT_APP_OPENROUTER_API_KEY}`,
           'HTTP-Referer': window.location.origin,
           'X-Title': 'SEONN'
         },
